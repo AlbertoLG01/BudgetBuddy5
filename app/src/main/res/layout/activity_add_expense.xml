@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddExpenseActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/toolbar_add_expense"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/Theme.BudgetBuddy5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:fitsSystemWindows="true">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:minHeight="?actionBarSize"
+            android:padding="@dimen/appbar_padding"
+            android:text="@string/app_name"
+            android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Title" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <TextView
+        android:id="@+id/titleTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_marginTop="70dp"
+        android:layout_marginStart="20dp"
+        android:text="Título"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar_add_expense"
+        android:gravity="center"/>
+
+    <EditText
+        android:id="@+id/titleEditText"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="8dp"
+        android:inputType="text"
+        app:layout_constraintStart_toEndOf="@+id/titleTextView"
+        app:layout_constraintTop_toBottomOf="@id/toolbar_add_expense"
+        tools:text="Ej: Pago luz"/>
+
+    <TextView
+        android:id="@+id/amountTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:text="Cantidad"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titleTextView"
+        android:layout_marginTop="50dp"
+        android:layout_marginStart="20dp"
+        android:gravity="center"/>
+
+    <EditText
+        android:id="@+id/amountEditText"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="40dp"
+        android:inputType="numberDecimal"
+        app:layout_constraintStart_toEndOf="@+id/amountTextView"
+        app:layout_constraintTop_toBottomOf="@+id/titleEditText"
+        tools:text="20.50"/>
+
+    <TextView
+        android:id="@+id/categoryTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:gravity="center"
+        android:layout_marginTop="50dp"
+        android:layout_marginStart="20dp"
+        android:text="Categoría"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/amountTextView" />
+
+    <Spinner
+        android:id="@+id/categorySpinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="45dp"
+        app:layout_constraintStart_toEndOf="@+id/categoryTextView"
+        app:layout_constraintTop_toBottomOf="@+id/amountEditText" />
+
+    <TextView
+        android:id="@+id/noteTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:gravity="center"
+        android:layout_marginTop="60dp"
+        android:layout_marginStart="20dp"
+        android:text="Nota Adicional"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/categoryTextView" />
+
+    <EditText
+        android:id="@+id/noteEditText"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="30dp"
+        android:inputType="textMultiLine"
+        android:minLines="2"
+        app:layout_constraintStart_toEndOf="@+id/noteTextView"
+        app:layout_constraintTop_toBottomOf="@id/categorySpinner"
+        tools:text="Este mes se ha retrasado 5 días"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/saveButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:src="@drawable/ic_check"
+        android:backgroundTint="@color/green"
+        app:borderWidth="0dp"
+        app:elevation="0dp"
+        app:fabSize="normal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/noteEditText" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

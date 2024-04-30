@@ -36,7 +36,7 @@ class TabbedActivity : AppCompatActivity() {
         val fab: FloatingActionButton = binding.fab
 
 
-        // Agregar un listener para detectar cambios de página en el ViewPager
+        // Agregar un listener para detectar cambios de página en el ViewPager y poder ocultar los botones
         viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
 
             //Da error si no lo dejo
@@ -60,6 +60,7 @@ class TabbedActivity : AppCompatActivity() {
 
         })
 
+        //Listener del boton de añadir
         fab.setOnClickListener {
             val currentPage = viewPager.currentItem
 

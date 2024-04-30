@@ -2,6 +2,7 @@ package com.example.budgetbuddy5.ui.main
 
 import IncomeFragment
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -47,12 +48,13 @@ class PlaceholderFragment : Fragment() {
         @JvmStatic
         fun newInstance(sectionNumber: Int): Fragment {
 
-            var fragment: Fragment = IncomeFragment()
+            var fragment: Fragment
 
             when(sectionNumber){
                 1 -> fragment = IncomeFragment()
                 2 -> fragment = ExpenseFragment()
                 3 -> fragment = StatisticsFragment()
+                else -> fragment = IncomeFragment()
             }
 
             return fragment

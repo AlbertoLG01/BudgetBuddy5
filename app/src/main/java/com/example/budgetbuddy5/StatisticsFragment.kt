@@ -188,10 +188,6 @@ class StatisticsFragment : Fragment() {
                 imageView.setImageResource(categoryIcon)
             }
 
-            //Holo.Graph no tiene este listener
-//            slice.setOnClickListener{
-//                Snackbar.make(requireView(), "${slice.title}, ${categoryIcon}", Snackbar.LENGTH_SHORT).show()
-//            }
 
             // Agregar la vista personalizada al diseño de la leyenda
             legendLayout.addView(legendItem)

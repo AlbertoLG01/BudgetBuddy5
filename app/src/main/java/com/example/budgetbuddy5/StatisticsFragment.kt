@@ -1,6 +1,5 @@
 package com.example.budgetbuddy5
 
-import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,18 +8,24 @@ import android.widget.Button
 import android.widget.GridLayout
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.compose.ui.graphics.colorspace.ColorSpace
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.echo.holographlibrary.PieGraph
 import com.echo.holographlibrary.PieSlice
 import androidx.core.graphics.ColorUtils
-import com.google.android.material.snackbar.Snackbar
+import androidx.lifecycle.lifecycleScope
+import com.example.budgetbuddy5.dataClasses.Expense
+import com.example.budgetbuddy5.dataClasses.ExpenseCategory
+import com.example.budgetbuddy5.dataClasses.Income
+import com.example.budgetbuddy5.dataClasses.IncomeCategory
+import kotlinx.coroutines.launch
 
 
 class StatisticsFragment : Fragment() {
 
     private var showTotalValues = true
+    private lateinit var incomeList: MutableList<Income>
+    private lateinit var expenseList: MutableList<Expense>
 
     private val categoryIcons = mapOf(
         IncomeCategory.SALARIO.name to R.drawable.ic_salario,
@@ -47,26 +52,30 @@ class StatisticsFragment : Fragment() {
         val tabbedActivity = requireActivity() as TabbedActivity
 
         // Mostrar el gráfico inicial con los valores totales de ingresos y gastos
-        val incomeList = tabbedActivity.getIncomeList()
-        val expenseList = tabbedActivity.getExpenseList()
+        tabbedActivity.lifecycleScope.launch {
+            incomeList = tabbedActivity.getIncomeList()
+            expenseList = tabbedActivity.getExpenseList()
 
-        mostrarValoresTotales(pieGraph, incomeList, expenseList, container, legendLayout)
+            mostrarValoresTotales(pieGraph, incomeList, expenseList, container, legendLayout)
 
 
-        // Configurar el listener del botón para cambiar el gráfico
-        changeGraphButton.setOnClickListener {
-            if (showTotalValues) {
-                mostrarPorCategoriasOTitulos(pieGraph, incomeList, expenseList, container, legendLayout)
-            } else {
-                mostrarValoresTotales(pieGraph, incomeList, expenseList, container, legendLayout)
+            // Configurar el listener del botón para cambiar el gráfico
+            changeGraphButton.setOnClickListener {
+                if (showTotalValues) {
+                    mostrarPorCategoriasOTitulos(pieGraph, incomeList, expenseList, container, legendLayout)
+                } else {
+                    mostrarValoresTotales(pieGraph, incomeList, expenseList, container, legendLayout)
+                }
+                showTotalValues = !showTotalValues
             }
-            showTotalValues = !showTotalValues
+
         }
 
         return view
+
     }
 
-    private fun mostrarValoresTotales(pieGraph: PieGraph, incomeList: MutableList<Income?>, expenseList: MutableList<Expense?>, container: ViewGroup?, legendLayout: GridLayout) {
+    private fun mostrarValoresTotales(pieGraph: PieGraph, incomeList: MutableList<Income>, expenseList: MutableList<Expense>, container: ViewGroup?, legendLayout: GridLayout) {
         pieGraph.removeSlices()
 
         val softGreen = ContextCompat.getColor(requireContext(), R.color.soft_green)
@@ -89,7 +98,7 @@ class StatisticsFragment : Fragment() {
         pieGraph.visibility = View.VISIBLE
     }
 
-    private fun mostrarPorCategoriasOTitulos(pieGraph: PieGraph, incomeList: MutableList<Income?>, expenseList: MutableList<Expense?>, container: ViewGroup?, legendLayout: GridLayout) {
+    private fun mostrarPorCategoriasOTitulos(pieGraph: PieGraph, incomeList: MutableList<Income>, expenseList: MutableList<Expense>, container: ViewGroup?, legendLayout: GridLayout) {
         pieGraph.removeSlices()
 
 
@@ -145,7 +154,7 @@ class StatisticsFragment : Fragment() {
     }
 
     // Funciones para calcular los valores totales de ingresos y gastos
-    private fun calcularTotalIngresos(incomeList: MutableList<Income?>): Float {
+    private fun calcularTotalIngresos(incomeList: MutableList<Income>): Float {
         var totalIngresos = 0f
 
         for (income in incomeList) {
@@ -155,7 +164,7 @@ class StatisticsFragment : Fragment() {
         return totalIngresos
     }
 
-    private fun calcularTotalGastos(expenseList: MutableList<Expense?>): Float {
+    private fun calcularTotalGastos(expenseList: MutableList<Expense>): Float {
         var totalGastos = 0f
 
         for (expense in expenseList) {

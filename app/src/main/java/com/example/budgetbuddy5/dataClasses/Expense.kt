@@ -1,15 +1,17 @@
-package com.example.budgetbuddy5
+package com.example.budgetbuddy5.dataClasses
 
-import java.io.Serializable
 import java.time.LocalDate
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
+@Entity(tableName = "Expenses")
 data class Expense(
-    val title: String,
+    @PrimaryKey val title: String,
     val amount: String, //Debería ser numérico pero eso lo controlo con el editText
     val category: String,
     val note: String,
     val date: LocalDate
-) : Serializable
+)
 
 enum class ExpenseCategory {
     PAGO,

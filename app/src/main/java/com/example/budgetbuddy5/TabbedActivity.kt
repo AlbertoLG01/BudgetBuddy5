@@ -3,27 +3,41 @@ package com.example.budgetbuddy5
 import android.content.Intent
 import android.os.Bundle
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayout
 import androidx.viewpager.widget.ViewPager
 import androidx.appcompat.app.AppCompatActivity
-import android.view.Menu
-import android.view.MenuItem
+import androidx.room.Room
+import com.example.budgetbuddy5.dataClasses.Expense
+import com.example.budgetbuddy5.dataClasses.Income
 import com.example.budgetbuddy5.ui.main.SectionsPagerAdapter
 import com.example.budgetbuddy5.databinding.ActivityTabbedBinding
+import com.example.budgetbuddy5.daos.AppDatabase
+import com.example.budgetbuddy5.daos.DatabaseBuilder
+import com.example.budgetbuddy5.daos.ExpenseDao
+import com.example.budgetbuddy5.daos.IncomeDao
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class TabbedActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityTabbedBinding
 
-    private val incomeList = mutableListOf<Income?>()
-    private val expenseList = mutableListOf<Expense?>()
     private var ingresosIniciados = false
     private var gastosIniciados = false
-
+    private lateinit var db: AppDatabase
+    private lateinit var incomeDao: IncomeDao
+    private lateinit var expenseDao: ExpenseDao
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        //Base de datos
+        db = DatabaseBuilder.getAppDatabase(this)
+        //db = Room.databaseBuilder(this, AppDatabase::class.java, "Base de Datos de BudgetBuddy").build()
+        incomeDao = db.incomeDao()
+        expenseDao = db.expenseDao()
 
         binding = ActivityTabbedBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -76,20 +90,28 @@ class TabbedActivity : AppCompatActivity() {
     }
 
 
-    fun getIncomeList(): MutableList<Income?> {
-        return incomeList
+    suspend fun getIncomeList(): MutableList<Income> {
+        return withContext(Dispatchers.IO) {
+            incomeDao.getAllIncomes()
+        }
     }
 
-    fun getExpenseList(): MutableList<Expense?> {
-        return expenseList
+    suspend fun getExpenseList(): MutableList<Expense> {
+        return withContext(Dispatchers.IO) {
+            expenseDao.getAllExpenses()
+        }
     }
 
-    fun addIncome(income: Income) {
-        incomeList.add(income)
+    suspend fun addIncome(income: Income) {
+        CoroutineScope(Dispatchers.IO).launch {
+            incomeDao.insertIncome(income)
+        }
     }
 
-    fun addExpense(expense: Expense) {
-        expenseList.add(expense)
+    suspend fun addExpense(expense: Expense) {
+        CoroutineScope(Dispatchers.IO).launch {
+            expenseDao.insertExpense(expense)
+        }
     }
 
     fun setIngresosIniciados(valor: Boolean){

@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
+    id("com.google.devtools.ksp")
+    id("kotlin-kapt")
 }
 
 android {
@@ -71,8 +73,23 @@ dependencies {
     implementation(libs.androidx.material3)
 
     implementation (libs.android.holo.graph)
-    implementation(libs.androidx.room.runtime)
+
+    //ROOM
+    val room_version = "2.6.1"
+
+    implementation("androidx.room:room-runtime:$room_version")
+
+    // To use Kotlin annotation processing tool (kapt)
+    kapt("androidx.room:room-compiler:$room_version")
+
+    implementation("androidx.room:room-ktx:$room_version")
+
+
+
+    implementation(libs.room)
+
     implementation(libs.pie.chart)
+
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

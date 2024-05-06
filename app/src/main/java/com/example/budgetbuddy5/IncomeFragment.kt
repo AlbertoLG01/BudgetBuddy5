@@ -180,9 +180,9 @@ class IncomeFragment : Fragment() {
             "€" -> {
                 if(esAscendente!=null) {
                     if (esAscendente as Boolean) {
-                        incomeList.sortBy { it.amount }
+                        incomeList.sortBy { it.amount.toFloat() }
                     } else {
-                        incomeList.sortByDescending { it.amount }
+                        incomeList.sortByDescending { it.amount.toFloat() }
                     }
                 }
             }
@@ -200,6 +200,7 @@ class IncomeFragment : Fragment() {
         // Notificar al adaptador de que los datos han cambiado
         tabbedActivity.lifecycleScope.launch {
             incomeAdapter.notifyDataSetChanged()
+            incomeRecyclerView.scrollToPosition(incomeList.size - 1)
         }
     }
 

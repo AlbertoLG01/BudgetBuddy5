@@ -180,9 +180,9 @@ class ExpenseFragment : Fragment() {
             "€" -> {
                 if(esAscendente!=null) {
                     if (esAscendente as Boolean) {
-                        expenseList.sortBy { it.amount }
+                        expenseList.sortBy { it.amount.toFloat() }
                     } else {
-                        expenseList.sortByDescending { it.amount }
+                        expenseList.sortByDescending { it.amount.toFloat() }
                     }
                 }
             }
@@ -200,6 +200,7 @@ class ExpenseFragment : Fragment() {
         // Notificar al adaptador de que los datos han cambiado
         tabbedActivity.lifecycleScope.launch {
             expenseAdapter.notifyDataSetChanged()
+            expenseRecyclerView.scrollToPosition(expenseList.size - 1)
         }
     }
 

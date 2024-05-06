@@ -19,6 +19,7 @@ import com.example.budgetbuddy5.dataClasses.ExpenseCategory
 import com.example.budgetbuddy5.dataClasses.Income
 import com.example.budgetbuddy5.dataClasses.IncomeCategory
 import kotlinx.coroutines.launch
+import ir.mahozad.android.PieChart
 
 
 class StatisticsFragment : Fragment() {
@@ -26,6 +27,9 @@ class StatisticsFragment : Fragment() {
     private var showTotalValues = true
     private lateinit var incomeList: MutableList<Income>
     private lateinit var expenseList: MutableList<Expense>
+    private lateinit var pieGraph: PieGraph
+    private lateinit var pieGraph2: PieGraph
+
 
     private val categoryIcons = mapOf(
         IncomeCategory.SALARIO.name to R.drawable.ic_salario,
@@ -45,7 +49,8 @@ class StatisticsFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_statistics, container, false)
 
-        val pieGraph = view.findViewById<PieGraph>(R.id.pieGraph)
+        pieGraph = view.findViewById<PieGraph>(R.id.pieGraph)
+        pieGraph2 = view.findViewById<PieGraph>(R.id.pieGraph2)
         val changeGraphButton = view.findViewById<Button>(R.id.changeGraphButton)
         val legendLayout = view.findViewById<GridLayout>(R.id.legendLayout)
 
@@ -98,6 +103,7 @@ class StatisticsFragment : Fragment() {
         pieGraph.visibility = View.VISIBLE
     }
 
+
     private fun mostrarPorCategoriasOTitulos(pieGraph: PieGraph, incomeList: MutableList<Income>, expenseList: MutableList<Expense>, container: ViewGroup?, legendLayout: GridLayout) {
         pieGraph.removeSlices()
 
@@ -146,6 +152,10 @@ class StatisticsFragment : Fragment() {
 
         addLegend(pieGraph, container, legendLayout)
         pieGraph.visibility = View.VISIBLE
+    }
+
+    private fun mostrarGraficosSeparados(){
+
     }
 
     private fun modificarTonalidad(colorBase: Int, index: Int): Int {

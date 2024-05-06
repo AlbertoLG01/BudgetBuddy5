@@ -9,9 +9,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:orientation="vertical"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp">
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/titleItemInTextView"
@@ -43,5 +41,14 @@
         android:layout_marginEnd="16dp"
         android:textSize="14sp"
         tools:text="72.50€" />
+
+    <ImageButton
+        android:id="@+id/deleteInButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|center_vertical"
+        android:src="@android:drawable/ic_menu_delete"
+        android:layout_marginEnd="5dp"
+        android:background="?attr/selectableItemBackgroundBorderless" />
 
 </LinearLayout>

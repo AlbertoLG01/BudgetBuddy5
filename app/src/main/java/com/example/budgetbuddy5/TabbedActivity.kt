@@ -108,9 +108,21 @@ class TabbedActivity : AppCompatActivity() {
         }
     }
 
+    suspend fun deleteIncome(income: Income) {
+        CoroutineScope(Dispatchers.IO).launch {
+            incomeDao.deleteIncome(income)
+        }
+    }
+
     suspend fun addExpense(expense: Expense) {
         CoroutineScope(Dispatchers.IO).launch {
             expenseDao.insertExpense(expense)
+        }
+    }
+
+    suspend fun deleteExpense(expense: Expense) {
+        CoroutineScope(Dispatchers.IO).launch {
+            expenseDao.deleteExpense(expense)
         }
     }
 

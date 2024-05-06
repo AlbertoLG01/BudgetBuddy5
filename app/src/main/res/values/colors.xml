@@ -13,8 +13,8 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="blue_light">#00BFFF</color>
-    <color name="soft_green">#669900</color>
-    <color name="soft_red">#CC3300</color>
+    <color name="soft_green">#8BC34A</color>
+    <color name="soft_red">#F39D2C23</color>
     <color name="appbarColor">#000000</color>
 
 

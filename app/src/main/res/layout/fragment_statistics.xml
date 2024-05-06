@@ -8,51 +8,84 @@
     android:layout_height="match_parent"
     tools:context=".StatisticsFragment">
 
-    <com.echo.holographlibrary.PieGraph
-        android:id="@+id/pieGraph"
-        android:layout_width="227dp"
-        android:layout_height="227dp"
-        android:layout_marginTop="124dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.117"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <com.echo.holographlibrary.PieGraph
-        android:id="@+id/pieGraph2"
-        android:layout_width="227dp"
-        android:layout_height="227dp"
-        android:layout_marginTop="36dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.118"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/pieGraph"
-        android:visibility="gone"/>
-
-    <GridLayout
-        android:id="@+id/legendLayout"
+    <TextView
+        android:id="@+id/tituloGrafico"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:columnCount="3"
-        android:rowCount="0"
-        android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@id/pieGraph2"
-        app:layout_constraintBottom_toTopOf="@id/changeGraphButton"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="30dp"
+        android:textStyle="bold|italic"
+        android:textSize="24sp"
+        android:layout_marginTop="10dp"/>
+
+    <ir.mahozad.android.PieChart
+        android:id="@+id/pieChartTotal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginStart="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tituloGrafico" />
+
+    <TextView
+        android:id="@+id/tituloIngresos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tituloGrafico"
+        app:layout_constraintStart_toStartOf="parent"
+        android:textStyle="italic"
+        android:textSize="18sp"
+        android:text="Ingresos"
+        android:layout_marginTop="10dp"
         android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp" />
+        android:visibility="gone"/>
+
+    <ir.mahozad.android.PieChart
+        android:id="@+id/pieChartIngresos"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tituloIngresos"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/tituloGastos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/pieChartIngresos"
+        app:layout_constraintStart_toStartOf="parent"
+        android:textStyle="italic"
+        android:textSize="18sp"
+        android:text="Gastos"
+        android:layout_marginStart="10dp"
+        android:visibility="gone"/>
+
+    <ir.mahozad.android.PieChart
+        android:id="@+id/pieChartGastos"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tituloGastos"
+        app:layout_constraintBottom_toTopOf="@id/changeGraphButton"
+        android:visibility="gone"/>
 
 
     <Button
         android:id="@+id/changeGraphButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Cambiar Gráfico"
-        app:layout_constraintTop_toBottomOf="@+id/legendLayout"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="30dp" />
+        android:layout_marginBottom="10dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

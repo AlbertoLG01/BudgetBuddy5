@@ -52,15 +52,15 @@ class ExpenseFragment : Fragment() {
             expenseRecyclerView = view.findViewById<RecyclerView>(R.id.expenseRecyclerView)
             expenseRecyclerView.adapter = expenseAdapter
             expenseRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+
+            //Filtros
+            ascendingButton = view.findViewById(R.id.btnExAscending)
+            descendingButton = view.findViewById(R.id.btnExDescending)
+            orderSpinner = view.findViewById(R.id.spinnerExOrder)
+
+            configurarListenersBotones()
+            configurarSpinner()
         }
-
-        //Filtros
-        ascendingButton = view.findViewById(R.id.btnExAscending)
-        descendingButton = view.findViewById(R.id.btnExDescending)
-        orderSpinner = view.findViewById(R.id.spinnerExOrder)
-
-        configurarListenersBotones()
-        configurarSpinner()
 
         //Recuperación de los datos de AddExpenseActivity
         val expenseIntent = requireActivity().intent
@@ -76,15 +76,16 @@ class ExpenseFragment : Fragment() {
 
             tabbedActivity.lifecycleScope.launch {
                 tabbedActivity.addExpense(expense)
+
+                //Despues de recuperar los datos, viajo al tab correspondiente (indice 1 para gastos)
+                val tabLayout = tabbedActivity.findViewById<TabLayout>(R.id.tabs)
+                tabLayout?.getTabAt(1)?.select()
+
+                val expenseRecyclerView = view.findViewById<RecyclerView>(R.id.expenseRecyclerView)
+                expenseRecyclerView.adapter?.notifyItemInserted(expenseList.size - 1) // Notificar al adaptador sobre el nuevo ingreso
+                expenseRecyclerView.scrollToPosition(expenseList.size - 1)
             }
 
-            //Despues de recuperar los datos, viajo al tab correspondiente (indice 1 para gastos)
-            val tabLayout = tabbedActivity.findViewById<TabLayout>(R.id.tabs)
-            tabLayout?.getTabAt(1)?.select()
-
-            val expenseRecyclerView = view.findViewById<RecyclerView>(R.id.expenseRecyclerView)
-            expenseRecyclerView.adapter?.notifyItemInserted(expenseList.size - 1) // Notificar al adaptador sobre el nuevo ingreso
-            expenseRecyclerView.scrollToPosition(expenseList.size - 1)
         }
 
         return view

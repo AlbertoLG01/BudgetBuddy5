@@ -17,7 +17,14 @@
     <color name="soft_red">#F39D2C23</color>
     <color name="appbarColor">#000000</color>
 
-
+    <color name="salario_color">#FFCDD2</color>
+    <color name="trabajo_color">#9575CD</color>
+    <color name="inversiones_color">#B2EBF2</color>
+    <color name="regalos_color">#FFECB3</color>
+    <color name="bizum_color">#66BB6A</color>
+    <color name="otro_color">#FFAB91</color>
+    <color name="pago_color">#EF9A9A</color>
+    <color name="deuda_color">#7986CB</color>
 
 
 </resources>

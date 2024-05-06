@@ -50,7 +50,7 @@ class AddExpenseActivity : AppCompatActivity() {
                 startActivity(intent)
                 finish() // Finaliza la actividad actual
             } else {
-                Toast.makeText(this, "Por favor, complete todos los campos obligatorios", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Por favor, complete el título y la cantidad", Toast.LENGTH_SHORT).show()
             }
         }
 

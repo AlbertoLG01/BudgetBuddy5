@@ -49,15 +49,16 @@ class IncomeFragment : Fragment() {
             incomeRecyclerView = view.findViewById<RecyclerView>(R.id.incomeRecyclerView)
             incomeRecyclerView.adapter = incomeAdapter
             incomeRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+
+            //Filtros
+            ascendingButton = view.findViewById(R.id.btnInAscending)
+            descendingButton = view.findViewById(R.id.btnInDescending)
+            orderSpinner = view.findViewById(R.id.spinnerInOrder)
+
+            configurarListenersBotones()
+            configurarSpinner()
+
         }
-
-        //Filtros
-        ascendingButton = view.findViewById(R.id.btnInAscending)
-        descendingButton = view.findViewById(R.id.btnInDescending)
-        orderSpinner = view.findViewById(R.id.spinnerInOrder)
-
-        configurarListenersBotones()
-        configurarSpinner()
 
         //Recuperación de los datos de AddIncomeActivity
         val incomeIntent = requireActivity().intent
@@ -73,16 +74,19 @@ class IncomeFragment : Fragment() {
 
             tabbedActivity.lifecycleScope.launch {
                 tabbedActivity.addIncome(income)
+
+                //Despues de recuperar los datos, viajo al tab correspondiente (indice 0 para ingresos)
+                val tabLayout = tabbedActivity.findViewById<TabLayout>(R.id.tabs)
+                tabLayout?.getTabAt(0)?.select()
+
+                val incomeRecyclerView = view.findViewById<RecyclerView>(R.id.incomeRecyclerView)
+                incomeRecyclerView.adapter?.notifyItemInserted(incomeList.size - 1) // Notificar al adaptador sobre el nuevo ingreso
+                incomeRecyclerView.scrollToPosition(incomeList.size - 1)
             }
 
-            //Despues de recuperar los datos, viajo al tab correspondiente (indice 0 para ingresos)
-            val tabLayout = tabbedActivity.findViewById<TabLayout>(R.id.tabs)
-            tabLayout?.getTabAt(0)?.select()
 
-            val incomeRecyclerView = view.findViewById<RecyclerView>(R.id.incomeRecyclerView)
-            incomeRecyclerView.adapter?.notifyItemInserted(incomeList.size - 1) // Notificar al adaptador sobre el nuevo ingreso
-            incomeRecyclerView.scrollToPosition(incomeList.size - 1)
         }
+
 
         return view
     }

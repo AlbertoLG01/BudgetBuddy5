@@ -185,7 +185,8 @@ class StatisticsFragment : Fragment() {
                 label = category,
                 labelSize = 16f,
                 labelColor = Color.BLACK,
-                outsideLabelMargin = 6f
+                outsideLabelMargin = 6f,
+                labelIcon = categoryIcons[category]
             )
         }
         pieChartIncome.slices = slices
@@ -206,7 +207,8 @@ class StatisticsFragment : Fragment() {
                 label = category,
                 labelSize = 16f,
                 labelColor = Color.BLACK,
-                outsideLabelMargin = 6f
+                outsideLabelMargin = 6f,
+                labelIcon = categoryIcons[category]
             )
         }
         pieChartExpense.slices = slices

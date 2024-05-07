@@ -45,8 +45,8 @@
 
     <ir.mahozad.android.PieChart
         android:id="@+id/pieChartIngresos"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -68,8 +68,8 @@
 
     <ir.mahozad.android.PieChart
         android:id="@+id/pieChartGastos"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
         app:layout_constraintEnd_toEndOf="parent"
